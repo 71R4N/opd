@@ -4,17 +4,6 @@ from aiogram import Bot, types, Dispatcher, executor
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 
-class Appointment:
-    def __init__(self, patient, doctor, data, vremya):
-        self.patient = patient
-        self.doctor = doctor
-        self.data = data
-        self.vremya = vremya
-
-    def __str__(self):
-        return f" - время: {self.vremya}, дата: {self.data.strftime('%d/%m/%Y')}, доктор: {self.doctor}"
-
-
 bot = Bot(token='5873543232:AAEGfPaiuxVmejyK5hVoshvOfiwyO4hkJe0')
 dp = Dispatcher(bot=bot, storage=MemoryStorage())
 
@@ -103,7 +92,7 @@ async def process_date(message: types.Message):
 async def process_time(message: types.Message, state):
     global name, time, doctor, date
     time = message.text
-    appointment = name + str(Appointment(name, doctor, date, time))
+    appointment = name + f" - время: {time}, дата: {date.strftime('%d.%m.%Y')}, доктор: {doctor}"
     appointments.append(appointment)
     text = f"Вы успешно записались на приём. Запись: {appointment}"
 
