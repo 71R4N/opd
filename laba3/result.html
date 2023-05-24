@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Результат поиска самого частого слова в файле</title>
+</head>
+<body>
+    {% if most_frequent_word %}
+        <h1>Самое частое слово: {{ most_frequent_word }}</h1>
+    {% else %}
+        <h1>Файл пуст</h1>
+    {% endif %}
+</body>
+</html>
