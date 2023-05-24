@@ -16,11 +16,6 @@ helpp = """/appointment - запись на приём.
 /list - список ваших записей.
 /delete - удалить запись на приём
 """
-info = """
-Адрес больницы:
-Время работы:
-Нельзя записать
-"""
 doctors = """
 Выберите врача:
 Доктор Степанов, эндокринолог, кабинет 223
@@ -29,7 +24,6 @@ doctors = """
 Доктор Кузнецов, гастроэнтеролог, кабинет 466
 Доктор Зубарев, нефролог, кабинет 359
 """
-appointments = []
 name = ''
 doctor = ''
 time = ''
@@ -44,11 +38,6 @@ async def start(message: types.Message):
 @dp.message_handler(commands=['help'])
 async def start(message: types.Message):
     await message.reply(text=helpp)
-
-
-@dp.message_handler(commands=['info'])
-async def start(message: types.Message):
-    await message.reply(text=info)
 
 
 @dp.message_handler(commands=['delete'])
@@ -174,7 +163,6 @@ async def process_time(message: types.Message, state):
     appointment = f"время: {time.strftime('%H:%M')}, дата: {date.strftime('%d.%m.%Y')}, доктор: {doctor}"
     with open(f'{name}.txt', 'a+') as f:
         f.write(appointment + '\n')
-    appointments.append(appointment)
     text = f"Вы успешно записались на приём. Запись: {appointment}"
 
     await message.reply(text)
